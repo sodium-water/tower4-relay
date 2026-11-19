@@ -1,1 +1,2 @@
+{ "name": "tower4-relay", "main": "server.js", "dependencies": { "ws": "^8.18.0" } }
 
