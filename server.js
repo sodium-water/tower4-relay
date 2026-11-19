@@ -1,6 +1,7 @@
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: process.env.PORT || 8080 });
 const rooms = new Map();
+
 wss.on('connection', ws => {
   let room = null;
   ws.on('message', (data, isBin) => {
@@ -13,7 +14,9 @@ wss.on('connection', ws => {
       room.add(ws);
       if (parts[0] === 'J') return;
       for (const client of room) {
-        if (client !== ws && client.readyState === WebSocket.OPEN) client.send(data, { binary: isBin });
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(data, { binary: isBin });
+        }
       }
     }
   });
